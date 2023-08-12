@@ -19,6 +19,9 @@ services:
       - NET_ADMIN
     
   server:
+    ports:
+      # Destination port. Must match what's set in the ENV
+      - 10080:10080/udp
     networks:
       server:
         ipv4_address: 192.168.99.1
