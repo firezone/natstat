@@ -1,0 +1,26 @@
+networks:
+  client:
+    ipam:
+      config:
+        - subnet: 192.168.99.4/30
+  server:
+    ipam:
+      config:
+        - subnet: 192.168.99.0/30
+
+services:
+  client: 
+    networks:
+      client:
+        ipv4_address: 192.168.99.5
+    image: natstat
+    build: .
+    cap_add:
+      - NET_ADMIN
+    
+  server:
+    networks:
+      server:
+        ipv4_address: 192.168.99.1
+    image: natstat
+    build: .
