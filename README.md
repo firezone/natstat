@@ -1,5 +1,3 @@
-# natstat
-
 A simple tool to measure behavior of your friendly neighborhood NAT device
 
 ## What is this?
@@ -17,3 +15,9 @@ that may emerge.
 docker compose build
 docker compose up
 ```
+
+## Client example command
+`natstat client -s 10.0.0.72 -d 100.0.0.92:8080 -m 1234`
+
+## Server example command
+`natstat server -l 100.0.0.92:8080 -m 1234`
