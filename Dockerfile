@@ -1,6 +1,6 @@
 FROM rust:slim
 
-RUN COPY . .
+COPY . .
 WORKDIR $
 RUN cargo build --release
 

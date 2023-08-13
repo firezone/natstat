@@ -1,29 +1,27 @@
-networks:
-  client:
-    ipam:
-      config:
-        - subnet: 192.168.99.4/30
-  server:
-    ipam:
-      config:
-        - subnet: 192.168.99.0/30
-
 services:
   client: 
-    networks:
-      client:
-        ipv4_address: 192.168.99.5
+    # This only takes on Linux. On other OSes, you'll probably want to
+    # run the binary directly so that you bypass Docker's NAT.
+    network_mode: host
+    environment:
+      # Set these to your liking
+      MAGIC_NUMBER: 1
+      # SRC_IP_ADDRESS: 192.168.99.5
+      # DST_SOCKET_ADDRESS: 172.19.0.52:10080
     image: natstat
     build: .
     cap_add:
       - NET_ADMIN
     
   server:
+    environment:
+      MAGIC_NUMBER: 1
+      LISTEN_ADDR: 0.0.0.0:10080
     ports:
       # Destination port. Must match what's set in the ENV
       - 10080:10080/udp
-    networks:
-      server:
-        ipv4_address: 192.168.99.1
+    # This only takes on Linux. On other OSes, you'll probably want to
+    # run the binary directly so that you bypass Docker's NAT.
+    network_mode: host
     image: natstat
     build: .
